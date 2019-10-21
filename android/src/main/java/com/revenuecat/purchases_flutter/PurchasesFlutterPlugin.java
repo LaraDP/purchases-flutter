@@ -259,7 +259,10 @@ public class PurchasesFlutterPlugin implements MethodCallHandler {
       MakePurchaseListener listener = new MakePurchaseListener() {
         @Override
         public void onCompleted(@NonNull Purchase purchase, @NonNull PurchaserInfo purchaserInfo) {
-          result.success(Mappers.map(purchaserInfo));
+          Map<String, Object> map = Mappers.map(purchaserInfo);
+          String token = purchase.getPurchaseToken();
+          map.put("transaction_id", token);
+          result.success(map);
         }
 
         @Override

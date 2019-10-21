@@ -29,6 +29,9 @@ class PurchaserInfo {
   /// The original App User Id recorded for this user.
   final String originalAppUserId;
 
+  /// The original App Store transaction ID
+  final String transactionId;
+
   PurchaserInfo.fromJson(Map<dynamic, dynamic> map)
       : entitlements = EntitlementInfos.fromJson(
             map["entitlements"] as Map<dynamic, dynamic>),
@@ -50,10 +53,13 @@ class PurchaserInfo {
                 .map((item) => item as String)
                 .toList(),
         firstSeen = map["firstSeen"],
-        originalAppUserId = map["originalAppUserId"];
+        originalAppUserId = map["originalAppUserId"],
+        transactionId = map['transaction_id'];
+        
+        
 
   @override
   String toString() {
-    return 'PurchaserInfo{entitlements: $entitlements, latestExpirationDate: $latestExpirationDate, allExpirationDates: $allExpirationDates, expirationsForActiveEntitlements: $expirationsForActiveEntitlements, activeSubscriptions: $activeSubscriptions, allPurchasedProductIdentifiers: $allPurchasedProductIdentifiers, firstSeen: $firstSeen, originalAppUserId: $originalAppUserId}';
+    return 'PurchaserInfo{entitlements: $entitlements, latestExpirationDate: $latestExpirationDate, allExpirationDates: $allExpirationDates, expirationsForActiveEntitlements: $expirationsForActiveEntitlements, activeSubscriptions: $activeSubscriptions, allPurchasedProductIdentifiers: $allPurchasedProductIdentifiers, firstSeen: $firstSeen, originalAppUserId: $originalAppUserId, transactionId: $transactionId}';
   }
 }

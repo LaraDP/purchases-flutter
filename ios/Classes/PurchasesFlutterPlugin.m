@@ -160,7 +160,11 @@ NSString *RNPurchasesPurchaserInfoUpdatedEvent = @"Purchases-PurchaserInfoUpdate
         if (error) {
             [self rejectWithResult:result error:error withExtraPayload:@{ @"userCancelled": @(userCancelled)}];
         } else {
-            result(purchaserInfo.dictionary);
+            NSMutableDictionary *data = [purchaserInfo.dictionary mutableCopy];
+        
+            [data setValue:transaction.originalTransaction.transactionIdentifier forKey:@"transaction_id"];
+            
+            result(data);
         }
     };
     
