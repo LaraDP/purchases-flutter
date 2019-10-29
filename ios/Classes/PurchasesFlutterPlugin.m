@@ -162,7 +162,13 @@ NSString *RNPurchasesPurchaserInfoUpdatedEvent = @"Purchases-PurchaserInfoUpdate
         } else {
             NSMutableDictionary *data = [purchaserInfo.dictionary mutableCopy];
         
-            [data setValue:transaction.originalTransaction.transactionIdentifier forKey:@"transaction_id"];
+            NSString *tID = transaction.originalTransaction.transactionIdentifier;
+            
+            if (tID == nil) {
+                tID = transaction.transactionIdentifier;
+            }
+            
+            [data setValue: tID forKey:@"transaction_id"];
             
             result(data);
         }
